@@ -36,4 +36,8 @@ export class MainComponent implements OnInit {
     });
   }
 
+  func1() {
+    console.log("Func1 Main");
+  }
+
 }

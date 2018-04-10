@@ -4,6 +4,15 @@
     width: 100%;
 }
   
-  .full-width {
+.full-width {
     width: 100%;
+}
+
+#buttonAndProgressSpinner > button {
+    float: left;
+}
+
+#buttonAndProgressSpinner > mat-progress-spinner {
+    float: left;
+    margin-left: 10px;
 }

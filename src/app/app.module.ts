@@ -1,5 +1,7 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule }    from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule }   from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -14,6 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DialogLoginFormComponent } from './dialog-login-form/dialog-login-form.component';
 import { DialogRegistrationFormComponent } from './dialog-registration-form/dialog-registration-form.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,9 @@ import { DialogRegistrationFormComponent } from './dialog-registration-form/dial
     DialogRegistrationFormComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatSidenavModule,
     MatToolbarModule,
@@ -32,7 +37,8 @@ import { DialogRegistrationFormComponent } from './dialog-registration-form/dial
     MatListModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatProgressSpinnerModule
   ],
   entryComponents: [
     DialogLoginFormComponent,

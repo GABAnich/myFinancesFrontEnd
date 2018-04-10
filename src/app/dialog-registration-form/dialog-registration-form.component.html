@@ -1,20 +1,23 @@
-<form class="form" action="/registration" method="POST">
+<form class="form">
   <mat-form-field class="full-width">
-    <input matInput placeholder="Email">
+    <input matInput placeholder="Email" name="login" [(ngModel)]="data.login">
   </mat-form-field>
   <mat-form-field class="full-width">
-    <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'">
-    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+    <input matInput placeholder="Password" [type]="hidePassword ? 'password' : 'text'" name="password" [(ngModel)]="data.password">
+    <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
   </mat-form-field>
   <mat-form-field class="full-width">
-    <input matInput placeholder="Repeat password" [type]="hide ? 'password' : 'text'">
-    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+    <input matInput placeholder="Repeat password" [type]="hideRepeatPassword ? 'password' : 'text'" name="data.repeatPassword" [(ngModel)]="repeatPassword">
+    <mat-icon matSuffix (click)="hideRepeatPassword = !hideRepeatPassword">{{hideRepeatPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
   </mat-form-field>
   <mat-form-field class="full-width">
-    <input matInput placeholder="First name">
+    <input matInput placeholder="First name" name="firstName" [(ngModel)]="data.firstName">
   </mat-form-field>
   <mat-form-field class="full-width">
-    <input matInput placeholder="Last name">
+    <input matInput placeholder="Last name" name="lastName" [(ngModel)]="data.lastName">
   </mat-form-field>
-  <button mat-raised-button color="primary" type="submit">Register</button>
+  <div id="buttonAndProgressSpinner">
+    <button mat-raised-button color="primary" type="reset" (click)="register()">Register</button>
+    <mat-progress-spinner color="primary" mode="indeterminate" value [diameter]="30" *ngIf="resourceLoading"></mat-progress-spinner>
+  </div>
 </form>
