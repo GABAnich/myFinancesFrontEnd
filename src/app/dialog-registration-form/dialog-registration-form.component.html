@@ -1,23 +1,28 @@
-<form class="form">
+<form class="form" [formGroup]="form" (submit)="register()">
   <mat-form-field class="full-width">
-    <input matInput placeholder="Email" name="login" [(ngModel)]="data.login">
+    <input matInput placeholder="Email" formControlName="login">
+    <mat-error *ngIf="form.invalid">{{ getLoginErrorMessage() }}</mat-error>
   </mat-form-field>
   <mat-form-field class="full-width">
-    <input matInput placeholder="Password" [type]="hidePassword ? 'password' : 'text'" name="password" [(ngModel)]="data.password">
-    <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+    <input matInput placeholder="Password" [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+    <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{ hidePassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+    <mat-error *ngIf="form.invalid">{{ getPasswordErrorMessage() }}</mat-error>
   </mat-form-field>
   <mat-form-field class="full-width">
-    <input matInput placeholder="Repeat password" [type]="hideRepeatPassword ? 'password' : 'text'" name="data.repeatPassword" [(ngModel)]="repeatPassword">
-    <mat-icon matSuffix (click)="hideRepeatPassword = !hideRepeatPassword">{{hideRepeatPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+    <input matInput placeholder="Repeat password" [type]="hideRepeatPassword ? 'password' : 'text'" formControlName="repeatPassword">
+    <mat-icon matSuffix (click)="hideRepeatPassword = !hideRepeatPassword">{{ hideRepeatPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+    <mat-error *ngIf="form.invalid">{{ getRepeatPasswordErrorMessage() }}</mat-error>
   </mat-form-field>
   <mat-form-field class="full-width">
-    <input matInput placeholder="First name" name="firstName" [(ngModel)]="data.firstName">
+    <input matInput placeholder="First name" formControlName="firstName">
+    <mat-error *ngIf="form.invalid">{{ getFirstNameErrorMessage() }}</mat-error>
   </mat-form-field>
   <mat-form-field class="full-width">
-    <input matInput placeholder="Last name" name="lastName" [(ngModel)]="data.lastName">
+    <input matInput placeholder="Last name" formControlName="lastName">
+    <mat-error *ngIf="form.invalid">{{ getLastNameErrorMessage() }}</mat-error>
   </mat-form-field>
   <div id="buttonAndProgressSpinner">
-    <button mat-raised-button color="primary" type="reset" (click)="register()">Register</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Register</button>
     <mat-progress-spinner color="primary" mode="indeterminate" value [diameter]="30" *ngIf="resourceLoading"></mat-progress-spinner>
   </div>
 </form>
