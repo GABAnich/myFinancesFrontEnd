@@ -59,9 +59,8 @@ export class DialogRegistrationFormComponent implements OnInit {
         this.dialogRef.close();  
       },
       (error) => {
-        alert("You are not registered. Try again.");
+        alert("You are not registered. Try again. " + error.error.message);
         this.resourceLoading = false;
-        console.error(error);
       },
       () => {
         // console.log('Complate');
