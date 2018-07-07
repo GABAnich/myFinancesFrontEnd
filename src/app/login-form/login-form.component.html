@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  <mat-progress-bar mode="indeterminate" *ngIf="resourceLoading"></mat-progress-bar>
   <form class="form" [formGroup]="form">
     <mat-form-field class="full-width">
       <input formControlName="login" matInput placeholder="Enter your login">
@@ -10,6 +10,6 @@
       <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
       <mat-error *ngIf="form.invalid">{{ getPasswordErrorMessage() }}</mat-error>
     </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">Log in</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Log in</button>
   </form>
 </div>
