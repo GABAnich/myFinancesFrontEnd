@@ -1,7 +1,7 @@
-import { BrowserModule }    from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -11,19 +11,22 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AppComponent } from './app.component';
-import { MainComponent } from './main/main.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { DialogLoginFormComponent } from './dialog-login-form/dialog-login-form.component';
-import { DialogRegistrationFormComponent } from './dialog-registration-form/dialog-registration-form.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
+import { LoginFormComponent } from './login-form/login-form.component';
+import { RegistrationFormComponent } from './registration-form/registration-form.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent,
-    DialogLoginFormComponent,
-    DialogRegistrationFormComponent
+    LoginFormComponent,
+    RegistrationFormComponent,
+    WelcomePageComponent
   ],
   imports: [
     FormsModule,
@@ -39,11 +42,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatProgressSpinnerModule
-  ],
-  entryComponents: [
-    DialogLoginFormComponent,
-    DialogRegistrationFormComponent
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

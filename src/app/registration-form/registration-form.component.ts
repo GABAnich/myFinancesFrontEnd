@@ -7,11 +7,11 @@ import { FormControl, FormGroup, FormBuilder, Validators, ReactiveFormsModule } 
 import { PasswordValidation } from './password-validation';
 
 @Component({
-  selector: 'app-dialog-registration-form',
-  templateUrl: './dialog-registration-form.component.html',
-  styleUrls: ['./dialog-registration-form.component.css']
+  selector: 'app-registration-form',
+  templateUrl: './registration-form.component.html',
+  styleUrls: ['./registration-form.component.css']
 })
-export class DialogRegistrationFormComponent implements OnInit {
+export class RegistrationFormComponent implements OnInit {
   form: FormGroup;
 
   hidePassword = true;
@@ -19,10 +19,9 @@ export class DialogRegistrationFormComponent implements OnInit {
   resourceLoading = false;
 
   constructor(private http: HttpClient,
-              public dialogRef: MatDialogRef<DialogRegistrationFormComponent>,
-              private fb: FormBuilder) {
-                this.createForm();
-              }
+    private fb: FormBuilder) {
+    this.createForm();
+  }
 
   ngOnInit() {
   }
@@ -32,31 +31,28 @@ export class DialogRegistrationFormComponent implements OnInit {
     let passwordRe = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+=-\`<>?,./])[A-Za-z\d~!@#$%^&*()_+=-\`<>?,./]{8,}/;
 
     this.form = this.fb.group({
-      login: ['', Validators.compose([ Validators.required, Validators.email ]) ],
-      password: ['', Validators.compose([ Validators.required, Validators.pattern(passwordRe) ]) ],
-      repeatPassword: ['', Validators.compose([ Validators.required ]) ],
-      firstName: ['', Validators.compose([ Validators.required, Validators.pattern(/^[a-zA-Z]+$/) ]) ],
-      lastName: ['', Validators.compose([ Validators.required, Validators.pattern(/^[a-zA-Z]+$/) ]) ]
+      login: ['', Validators.compose([Validators.required, Validators.email])],
+      password: ['', Validators.compose([Validators.required, Validators.pattern(passwordRe)])],
+      repeatPassword: ['', Validators.compose([Validators.required])],
+      firstName: ['', Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z]+$/)])],
+      lastName: ['', Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z]+$/)])]
     }, {
-      validator: PasswordValidation.MatchPassword
-    });
-  }  
+        validator: PasswordValidation.MatchPassword
+      });
+  }
 
   register() {
-    console.log(this.form);
-
     this.resourceLoading = true;
 
     let httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
+        'Content-Type': 'application/json',
       })
     };
 
     return this.http.post('http://localhost:3000/users', this.form.value, httpOptions).subscribe(
       (value) => {
         this.resourceLoading = false;
-        this.dialogRef.close();  
       },
       (error) => {
         alert("You are not registered. Try again. " + error.error.message);
@@ -70,31 +66,31 @@ export class DialogRegistrationFormComponent implements OnInit {
 
   getLoginErrorMessage() {
     return this.form.get('login').hasError('required') ? 'You must enter a login' :
-        this.form.get('login') ? 'Not a valid email' :
-            '';
+      this.form.get('login') ? 'Not a valid email' :
+        '';
   }
 
   getPasswordErrorMessage() {
     return this.form.get('password').hasError('required') ? 'You must enter a password' :
-        this.form.get('password').hasError('pattern') ? 'Minimum 8 characters, at least one uppercase, lowercase, number and one special character' :
-          '';
+      this.form.get('password').hasError('pattern') ? 'Minimum 8 characters, at least one uppercase, lowercase, number and one special character' :
+        '';
   }
 
   getRepeatPasswordErrorMessage() {
     return this.form.get('repeatPassword').hasError('required') ? 'You must repeat a password' :
-        this.form.get('repeatPassword').hasError('MatchPassword') ? 'Passwords must match' :
-          '';
+      this.form.get('repeatPassword').hasError('MatchPassword') ? 'Passwords must match' :
+        '';
   }
 
   getFirstNameErrorMessage() {
-    return this.form.get('firstName').hasError('required') ? 'You must repeat a password' :
-        this.form.get('firstName').hasError('pattern') ? 'Only letters' :
-          '';
+    return this.form.get('firstName').hasError('required') ? 'You must enter a first name' :
+      this.form.get('firstName').hasError('pattern') ? 'Only letters' :
+        '';
   }
 
   getLastNameErrorMessage() {
-    return this.form.get('lastName').hasError('required') ? 'You must repeat a password' :
-        this.form.get('lastName').hasError('pattern') ? 'Only letters' :
-          '';
+    return this.form.get('lastName').hasError('required') ? 'You must enter a last name' :
+      this.form.get('lastName').hasError('pattern') ? 'Only letters' :
+        '';
   }
 }

@@ -1,0 +1,25 @@
+.wrapper {
+  min-width: 150px;
+  max-width: 400px;
+  margin: 2% auto;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.form {
+  margin: 2% auto;
+  width: 95%;
+  padding-bottom: 2%;
+  padding-top: 2%;
+}
+  
+.full-width {
+  width: 100%;
+}
+
+mat-icon {
+  cursor: pointer;
+}
+
+mat-progress-bar {
+  width: 100%;
+}

@@ -4,11 +4,11 @@ import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/fo
 import { ErrorStateMatcher } from '@angular/material/core';
 
 @Component({
-  selector: 'app-dialog-login-form',
-  templateUrl: './dialog-login-form.component.html',
-  styleUrls: ['./dialog-login-form.component.css']
+  selector: 'app-login-form',
+  templateUrl: './login-form.component.html',
+  styleUrls: ['./login-form.component.css']
 })
-export class DialogLoginFormComponent implements OnInit {
+export class LoginFormComponent implements OnInit {
 
   constructor() { }
 
