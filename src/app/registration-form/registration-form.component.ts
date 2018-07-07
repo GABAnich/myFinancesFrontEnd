@@ -14,9 +14,9 @@ import { PasswordValidation } from './password-validation';
 export class RegistrationFormComponent implements OnInit {
   form: FormGroup;
 
-  hidePassword = true;
-  hideRepeatPassword = true;
-  resourceLoading = false;
+  hidePassword: boolean = true;
+  hideRepeatPassword: boolean = true;
+  resourceLoading: boolean = false;
 
   constructor(private http: HttpClient,
     private fb: FormBuilder) {
