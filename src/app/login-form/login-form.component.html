@@ -1,6 +1,6 @@
 <div class="wrapper">
   <mat-progress-bar mode="indeterminate" *ngIf="resourceLoading"></mat-progress-bar>
-  <form class="form" [formGroup]="form">
+  <form class="form" [formGroup]="form" (submit)="login()">
     <mat-form-field class="full-width">
       <input formControlName="login" matInput placeholder="Enter your login">
       <mat-error *ngIf="form.invalid">{{ getLoginErrorMessage() }}</mat-error>

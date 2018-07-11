@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { FormControl, FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { PasswordValidation } from './password-validation';
 
@@ -51,7 +49,7 @@ export class RegistrationFormComponent implements OnInit {
     };
 
     return this.http.post('http://localhost:3000/users', this.form.value, httpOptions).subscribe(
-      (value) => {
+      () => {
         this.resourceLoading = false;
       },
       (error) => {
