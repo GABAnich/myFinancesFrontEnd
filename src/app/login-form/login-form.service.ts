@@ -5,17 +5,16 @@ import { Observable } from '../../../node_modules/rxjs/Observable';
 
 @Injectable()
 export class LoginFormService {
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    })
+  };
 
   constructor(private http: HttpClient) { }
 
   authentication(formValues) {
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      })
-    };
-
-    return this.http.post('http://localhost:3000/login', formValues, httpOptions).toPromise()
+    return this.http.post('http://localhost:3000/login', formValues, this.httpOptions).toPromise()
       .then(res => {
         console.log(res);
         // Store token in auth service

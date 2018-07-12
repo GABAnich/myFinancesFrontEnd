@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '../../../node_modules/@angular/router';
 
 import { PasswordValidation } from './password-validation';
+import { RegistrationFormService } from './registration-form.service';
 
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
-  styleUrls: ['./registration-form.component.css']
+  styleUrls: ['./registration-form.component.css'],
+  providers: [RegistrationFormService]
 })
 export class RegistrationFormComponent implements OnInit {
   form: FormGroup;
@@ -17,7 +20,9 @@ export class RegistrationFormComponent implements OnInit {
   resourceLoading: boolean = false;
 
   constructor(private http: HttpClient,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private router: Router,
+    private registrationFormService: RegistrationFormService) {
     this.createForm();
   }
 
@@ -41,25 +46,16 @@ export class RegistrationFormComponent implements OnInit {
 
   register() {
     this.resourceLoading = true;
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
+    this.registrationFormService.register(this.form.value)
+      .then(() => {
+        this.resourceLoading = false;
+        this.router.navigate(['/']);
       })
-    };
-
-    return this.http.post('http://localhost:3000/users', this.form.value, httpOptions).subscribe(
-      () => {
+      .catch(err => {
+        console.error(err);
+        alert("You are not registered. Try again. " + err.error.message);
         this.resourceLoading = false;
-      },
-      (error) => {
-        alert("You are not registered. Try again. " + error.error.message);
-        this.resourceLoading = false;
-      },
-      () => {
-        // console.log('Complate');
-      }
-    );
+      });
   }
 
   getLoginErrorMessage() {

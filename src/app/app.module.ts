@@ -20,6 +20,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { AppRoutingModule } from './app-routing.module';
+import { UserServerService } from './user-server.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { AppRoutingModule } from './app-routing.module';
     MatProgressBarModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [UserServerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
