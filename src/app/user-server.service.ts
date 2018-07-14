@@ -1,23 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { TokenService } from './token.service';
 
 @Injectable()
 export class UserServerService {
   httpOptions: Object;
   httpOptionsWithToken: Object;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+    private tokenService: TokenService) {
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       })
     };
-  
+
     this.httpOptionsWithToken = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // get token from authService
-        'x-access-token': 'get token from authSerice'
+        'x-access-token': tokenService.getToken()
       })
     }
   }
