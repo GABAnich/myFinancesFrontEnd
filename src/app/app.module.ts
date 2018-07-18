@@ -23,13 +23,16 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { AppRoutingModule } from './app-routing.module';
 import { UserServerService } from './user-server.service';
 import { AuthService } from './auth.service';
+import { LoginRegisterComponent } from './login-register/login-register.component';
+import { LoginServerService } from './login-server.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginFormComponent,
     RegistrationFormComponent,
-    WelcomePageComponent
+    WelcomePageComponent,
+    LoginRegisterComponent
   ],
   imports: [
     FormsModule,
@@ -52,7 +55,8 @@ import { AuthService } from './auth.service';
   providers: [
     UserServerService,
     AuthService,
-    CookieService
+    CookieService,
+    LoginServerService
   ],
   bootstrap: [AppComponent]
 })

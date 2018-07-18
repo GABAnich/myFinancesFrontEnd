@@ -4,9 +4,6 @@ import { AuthService } from './auth.service';
 
 @Injectable()
 export class UserServerService {
-  httpOptions: Object;
-  httpOptionsWithToken: Object;
-
   constructor(private http: HttpClient,
     private authService: AuthService) { }
 

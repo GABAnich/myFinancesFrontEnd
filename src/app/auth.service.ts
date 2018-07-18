@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { LoginServerService } from './login-server.service';
 
 @Injectable()
 export class AuthService {
@@ -7,7 +8,8 @@ export class AuthService {
   login: string = undefined;
   password: string = undefined;
 
-  constructor(private cookieService: CookieService) { }
+  constructor(private cookieService: CookieService,
+    private loginServerService: LoginServerService) { }
 
   getToken() {
     if (this.token !== undefined) {
@@ -61,6 +63,19 @@ export class AuthService {
     this.token = undefined;
     this.login = undefined;
     this.password = undefined;
+  }
+
+  checkData() {
+    if (this.login === undefined && this.password === undefined
+      && this.cookieService.check('login') && this.cookieService.check('password')) {
+      this.loginServerService.authentication(this.cookieService.get('login'), this.cookieService.get('password'))
+        .subscribe(
+          () => { },
+          (err => {
+            this.logOut();
+          })
+        );
+    }
   }
 
 }
