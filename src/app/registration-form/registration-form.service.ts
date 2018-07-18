@@ -9,10 +9,10 @@ export class RegistrationFormService {
   register(formValues) {
     let { login, password, firstName, lastName } = formValues;
 
-    this.userServerService.getUserByLogin("email3@gmail.com").toPromise()
-      .then(user => {
-        console.log(user);
-      });
+    // this.userServerService.getUserByLogin("email3@gmail.com").toPromise()
+    //   .then(user => {
+    //     console.log(user);
+    //   });
 
     return this.userServerService.createUser(login, password, firstName, lastName).toPromise();
   }

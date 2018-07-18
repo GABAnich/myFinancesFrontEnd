@@ -22,7 +22,7 @@ import { RegistrationFormComponent } from './registration-form/registration-form
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { AppRoutingModule } from './app-routing.module';
 import { UserServerService } from './user-server.service';
-import { TokenService } from './token.service';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +51,7 @@ import { TokenService } from './token.service';
   ],
   providers: [
     UserServerService,
-    TokenService,
+    AuthService,
     CookieService
   ],
   bootstrap: [AppComponent]

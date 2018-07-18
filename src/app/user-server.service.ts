@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { TokenService } from './token.service';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class UserServerService {
@@ -8,17 +8,13 @@ export class UserServerService {
   httpOptionsWithToken: Object;
 
   constructor(private http: HttpClient,
-    private tokenService: TokenService) {
-    this.httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      })
-    };
+    private authService: AuthService) { }
 
-    this.httpOptionsWithToken = {
+  getHttpOptions() {
+    return {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'x-access-token': tokenService.getToken()
+        'x-access-token': this.authService.getToken()
       })
     }
   }
@@ -26,7 +22,7 @@ export class UserServerService {
   createUser(login, password, firstName, lastName) {
     return this.http.post('http://localhost:3000/users',
       { login, password, firstName, lastName },
-      this.httpOptions);
+      this.getHttpOptions());
   }
 
 
@@ -39,16 +35,26 @@ export class UserServerService {
     return this.http.get(`http://localhost:3000/users/login/${userLogin}`);
   }
 
-  // Наступні методи потребують сервісу для зберігання токену
+  updateUserbyId(userId, firstName, lastName) {
+    return this.http.put(`http://localhost:3000/users/id/${userId}`,
+      { firstName, lastName },
+      this.getHttpOptions());
+  }
 
-  // updateUserbyId
+  updateUserbyLogin(userLogin, firstName, lastName) {
+    return this.http.put(`http://localhost:3000/users/login/${userLogin}`,
+      { firstName, lastName },
+      this.getHttpOptions());
+  }
 
 
-  // updateUserByLogin
+  deleteUserbyId(userId) {
+    return this.http.delete(`http://localhost:3000/users/id/${userId}`,
+      this.getHttpOptions());
+  }
 
-
-  // deleteUserById
-
-
-  // deleteUserByLogin
+  deleteUserbyLogin(userLogin) {
+    return this.http.delete(`http://localhost:3000/users/login/${userLogin}`,
+      this.getHttpOptions());
+  }
 }

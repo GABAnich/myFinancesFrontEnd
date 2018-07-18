@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '../../../node_modules/@angular/router';
+import { Router } from '@angular/router';
 
 import { PasswordValidation } from './password-validation';
 import { RegistrationFormService } from './registration-form.service';
