@@ -19,7 +19,6 @@ export class LoginRegisterComponent implements OnInit {
 
   ngOnInit() {
     this.authService.checkData();
-    console.log('Check data');
   }
 
   logOut() {

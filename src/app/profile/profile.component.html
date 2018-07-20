@@ -1,0 +1,13 @@
+<div class="wrapper">
+  <form class="form" [formGroup]="form" (submit)="update()">
+    <mat-progress-bar mode="indeterminate" *ngIf="resourceLoading"></mat-progress-bar>
+    <mat-form-field class="full-width">
+      <input formControlName="firstName" matInput placeholder="Enter your firstName">
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput formControlName="lastName" placeholder="Enter your lastName">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Update user</button>
+  </form>
+  <button mat-raised-button color="warn" (click)="deleteUser()">Delete user</button>
+</div>

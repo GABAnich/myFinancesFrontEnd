@@ -1,20 +1,25 @@
 import { Injectable } from '@angular/core';
 import { UserServerService } from '../user-server.service';
+import { tap } from 'rxjs/operators';
+import { AuthService } from '../auth.service';
 
 @Injectable()
 export class RegistrationFormService {
 
-  constructor(private userServerService: UserServerService) { }
+  constructor(private userServerService: UserServerService,
+    private authService: AuthService) { }
 
   register(formValues) {
     let { login, password, firstName, lastName } = formValues;
 
-    // this.userServerService.getUserByLogin("email3@gmail.com").toPromise()
-    //   .then(user => {
-    //     console.log(user);
-    //   });
-
-    return this.userServerService.createUser(login, password, firstName, lastName).toPromise();
+    return this.userServerService.createUser(login, password, firstName, lastName)
+      .pipe(
+        tap((user: any) => {
+          this.authService.saveToken(user.token);
+          this.authService.saveLogin(login);
+          this.authService.savePassword(password);
+        }
+        ));
   }
 
 }

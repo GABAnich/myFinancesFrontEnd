@@ -7,11 +7,15 @@ export class UserServerService {
   constructor(private http: HttpClient,
     private authService: AuthService) { }
 
+  getToken() {
+    return this.authService.getToken() ? this.authService.getToken() : '';
+  }
+
   getHttpOptions() {
     return {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'x-access-token': this.authService.getToken()
+        'x-access-token': this.getToken()
       })
     }
   }

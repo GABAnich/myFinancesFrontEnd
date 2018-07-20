@@ -4,9 +4,9 @@ import { LoginServerService } from './login-server.service';
 
 @Injectable()
 export class AuthService {
-  token: string = undefined;
-  login: string = undefined;
-  password: string = undefined;
+  private token: string = undefined;
+  private login: string = undefined;
+  private password: string = undefined;
 
   constructor(private cookieService: CookieService,
     private loginServerService: LoginServerService) { }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -45,17 +45,23 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   register() {
+    event.preventDefault();
+
     this.resourceLoading = true;
     this.registrationFormService.register(this.form.value)
-      .then(() => {
-        this.resourceLoading = false;
-        this.router.navigate(['/']);
-      })
-      .catch(err => {
-        console.error(err);
-        alert("You are not registered. Try again. " + err.error.message);
-        this.resourceLoading = false;
-      });
+      .subscribe(
+        () => {
+          this.resourceLoading = false;
+          this.router.navigate(['/']);
+        },
+        err => {
+          this.resourceLoading = false;
+          console.error(err);
+          if ('error' in err && 'message' in err.error) {
+            alert("You are not registered. Try again. " + err.error.message);
+          }
+        }
+      );
   }
 
   getLoginErrorMessage() {

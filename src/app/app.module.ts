@@ -25,6 +25,7 @@ import { UserServerService } from './user-server.service';
 import { AuthService } from './auth.service';
 import { LoginRegisterComponent } from './login-register/login-register.component';
 import { LoginServerService } from './login-server.service';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { LoginServerService } from './login-server.service';
     LoginFormComponent,
     RegistrationFormComponent,
     WelcomePageComponent,
-    LoginRegisterComponent
+    LoginRegisterComponent,
+    ProfileComponent
   ],
   imports: [
     FormsModule,
