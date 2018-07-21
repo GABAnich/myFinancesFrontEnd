@@ -12,6 +12,8 @@ import { Router } from '../../../node_modules/@angular/router';
 export class ProfileComponent implements OnInit {
   form: FormGroup;
   resourceLoading: boolean = false;
+  firstNamePlaceholder: string = '';
+  lastNamePlaceholder: string = '';
 
   constructor(private fb: FormBuilder,
     private userServerService: UserServerService,
@@ -21,6 +23,13 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userServerService.getUserByLogin(this.authService.getLogin()).subscribe(
+      (user: any) => {
+        this.firstNamePlaceholder = user.firstName;
+        this.lastNamePlaceholder = user.lastName;
+      },
+      err => console.error(err)
+    );
   }
 
   createForm() {
