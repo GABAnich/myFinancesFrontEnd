@@ -14,10 +14,10 @@ import { RegistrationFormService } from './registration-form.service';
 })
 export class RegistrationFormComponent implements OnInit {
   form: FormGroup;
-
   hidePassword: boolean = true;
   hideRepeatPassword: boolean = true;
   resourceLoading: boolean = false;
+  formError: string = '';
 
   constructor(private http: HttpClient,
     private fb: FormBuilder,
@@ -27,6 +27,11 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.form.valueChanges.subscribe(
+      () => {
+        this.formError = '';
+      }
+    );
   }
 
   createForm() {
@@ -57,9 +62,7 @@ export class RegistrationFormComponent implements OnInit {
         err => {
           this.resourceLoading = false;
           console.error(err);
-          if ('error' in err && 'message' in err.error) {
-            alert("You are not registered. Try again. " + err.error.message);
-          }
+          this.formError = err.error.message;
         }
       );
   }

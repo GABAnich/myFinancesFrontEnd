@@ -13,6 +13,7 @@ export class LoginFormComponent implements OnInit {
   form: FormGroup;
   resourceLoading: boolean = false;
   hide: boolean = true;
+  formError: string = '';
 
   constructor(private fb: FormBuilder,
     private loginFormService: LoginFormService,
@@ -21,6 +22,11 @@ export class LoginFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.form.valueChanges.subscribe(
+      () => {
+        this.formError = '';
+      }
+    );
   }
 
   createForm() {
@@ -47,6 +53,7 @@ export class LoginFormComponent implements OnInit {
       })
       .catch(err => {
         console.error(err);
+        this.formError = err.error.message;
         this.resourceLoading = false;
       });
   }

@@ -23,6 +23,7 @@
       <input matInput placeholder="Last name" formControlName="lastName">
       <mat-error *ngIf="form.invalid">{{ getLastNameErrorMessage() }}</mat-error>
     </mat-form-field>
+    <mat-error>{{ formError }}</mat-error>
     <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Register</button>
   </form>
 </div>

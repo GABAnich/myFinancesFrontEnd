@@ -14,6 +14,7 @@ export class ProfileComponent implements OnInit {
   resourceLoading: boolean = false;
   firstNamePlaceholder: string = '';
   lastNamePlaceholder: string = '';
+  formError: string = '';
 
   constructor(private fb: FormBuilder,
     private userServerService: UserServerService,
@@ -29,6 +30,12 @@ export class ProfileComponent implements OnInit {
         this.lastNamePlaceholder = user.lastName;
       },
       err => console.error(err)
+    );
+
+    this.form.valueChanges.subscribe(
+      () => {
+        this.formError = '';
+      }
     );
   }
 
@@ -51,6 +58,7 @@ export class ProfileComponent implements OnInit {
         err => {
           this.resourceLoading = false;
           console.log(err);
+          this.formError = err.error.message;
         });
   }
 
@@ -65,6 +73,7 @@ export class ProfileComponent implements OnInit {
       err => {
         this.resourceLoading = false;
         console.error(err);
+        this.formError = err.error.message;
       }
     );
   }

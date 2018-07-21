@@ -9,5 +9,6 @@
     </mat-form-field>
     <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Update user</button>
   </form>
+  <mat-error>{{ formError }}</mat-error>
   <button mat-raised-button color="warn" (click)="deleteUser()">Delete user</button>
 </div>
