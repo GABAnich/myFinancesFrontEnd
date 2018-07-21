@@ -1,14 +1,13 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div class="container">
-  <!-- TO DO: Add login, register link
-       Component context login and register, if user loggined, component changes
-       "Hello, {{user}}, Log out" -->
   <mat-toolbar color="primary" class="toolbar">
     <button mat-icon-button (click)="snav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-    <h1 class="app-name">myFinances</h1>
+    <button mat-button routerLink="/">
+      <h1 class="app-name">myFinances</h1>
+    </button>
     <div class="wrapper">
       <app-login-register></app-login-register>
     </div>
